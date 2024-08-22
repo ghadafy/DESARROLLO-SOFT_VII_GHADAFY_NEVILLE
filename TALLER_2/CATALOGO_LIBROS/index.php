@@ -11,7 +11,7 @@ $libs = obtenerLibros();
 echo "<ul>";
 foreach($libs as $lib){
      
-    echo "<li><b>".$lib['titulo']."</b></li>";
+    echo "<li><b><span>".$lib['titulo']."</span></b></li>";
     echo "<p>".mostrarDetalles($lib['titulo'])."</p>"; 
     
 }
