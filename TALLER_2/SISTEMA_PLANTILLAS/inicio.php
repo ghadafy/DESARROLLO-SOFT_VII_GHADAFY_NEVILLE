@@ -7,7 +7,6 @@ include 'plantillas/encabezado.php';
 
 <h2>Página de Inicio</h2>
 <h1>Bienvenidos a [Nombre de tu Empresa]</h1>
-<p>Este es el contenido específico de la página de inicio.</p>
 
 
 
