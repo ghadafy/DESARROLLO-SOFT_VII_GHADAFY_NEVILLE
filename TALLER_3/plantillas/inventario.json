@@ -1,0 +1,247 @@
+[
+    {
+        "nombre": "Procesador Intel Core i5",
+        "precio": 250.00,
+        "cantidad": 20
+    },
+    {
+        "nombre": "Memoria RAM 8GB DDR4",
+        "precio": 40.00,
+        "cantidad": 100
+    },
+    {
+        "nombre": "Disco Duro SSD 500GB",
+        "precio": 60.00,
+        "cantidad": 4
+    },
+    {
+        "nombre": "Placa Madre ATX",
+        "precio": 120.00,
+        "cantidad": 30
+    },
+    {
+        "nombre": "Fuente de Poder 600W",
+        "precio": 50.00,
+        "cantidad": 25
+    },
+    {
+        "nombre": "Tarjeta Gráfica NVIDIA GTX 1650",
+        "precio": 180.00,
+        "cantidad": 15
+    },
+    {
+        "nombre": "Monitor LED 24 pulgadas",
+        "precio": 150.00,
+        "cantidad": 10
+    },
+    {
+        "nombre": "Teclado Mecánico",
+        "precio": 70.00,
+        "cantidad": 40
+    },
+    {
+        "nombre": "Mouse Inalámbrico",
+        "precio": 25.00,
+        "cantidad": 60
+    },
+    {
+        "nombre": "Disco Duro Externo 1TB",
+        "precio": 80.00,
+        "cantidad": 30
+    },
+    {
+        "nombre": "Router Wi-Fi",
+        "precio": 45.00,
+        "cantidad": 35
+    },
+    {
+        "nombre": "Cámara Web 1080p",
+        "precio": 50.00,
+        "cantidad": 20
+    },
+    {
+        "nombre": "Impresora Multifuncional",
+        "precio": 200.00,
+        "cantidad": 15
+    },
+    {
+        "nombre": "Cables HDMI 1.5m",
+        "precio": 10.00,
+        "cantidad": 200
+    },
+    {
+        "nombre": "USB Flash Drive 64GB",
+        "precio": 15.00,
+        "cantidad": 150
+    },
+    {
+        "nombre": "Auriculares Bluetooth",
+        "precio": 30.00,
+        "cantidad": 50
+    },
+    {
+        "nombre": "Disco Duro 2TB SATA",
+        "precio": 70.00,
+        "cantidad": 1
+    },
+    {
+        "nombre": "Adaptador USB a Ethernet",
+        "precio": 20.00,
+        "cantidad": 80
+    },
+    {
+        "nombre": "Hub USB 4 Puertos",
+        "precio": 15.00,
+        "cantidad": 100
+    },
+    {
+        "nombre": "Mousepad Gaming",
+        "precio": 12.00,
+        "cantidad": 70
+    },
+    {
+        "nombre": "Altavoces 2.1",
+        "precio": 40.00,
+        "cantidad": 5
+    },
+    {
+        "nombre": "Micrófono USB",
+        "precio": 55.00,
+        "cantidad": 30
+    },
+    {
+        "nombre": "Enfriador para Laptop",
+        "precio": 25.00,
+        "cantidad": 45
+    },
+    {
+        "nombre": "Soporte de Monitor",
+        "precio": 30.00,
+        "cantidad": 25
+    },
+    {
+        "nombre": "Cable de Alimentación",
+        "precio": 8.00,
+        "cantidad": 150
+    },
+    {
+        "nombre": "Adaptador HDMI a VGA",
+        "precio": 12.00,
+        "cantidad": 70
+    },
+    {
+        "nombre": "Módulo de Memoria 16GB DDR4",
+        "precio": 80.00,
+        "cantidad": 25
+    },
+    {
+        "nombre": "Tarjeta de Sonido Externa",
+        "precio": 35.00,
+        "cantidad": 30
+    },
+    {
+        "nombre": "UPS 1000VA",
+        "precio": 120.00,
+        "cantidad": 5
+    },
+    {
+        "nombre": "Módem USB 4G",
+        "precio": 50.00,
+        "cantidad": 20
+    },
+    {
+        "nombre": "Teclado Inalámbrico",
+        "precio": 30.00,
+        "cantidad": 40
+    },
+    {
+        "nombre": "Lector de Tarjetas SD",
+        "precio": 10.00,
+        "cantidad": 75
+    },
+    {
+        "nombre": "Estación de Trabajo",
+        "precio": 1500.00,
+        "cantidad": 5
+    },
+    {
+        "nombre": "Torre de PC",
+        "precio": 80.00,
+        "cantidad": 20
+    },
+    {
+        "nombre": "Tarjeta Madre Mini ITX",
+        "precio": 100.00,
+        "cantidad": 20
+    },
+    {
+        "nombre": "SSD M.2 1TB",
+        "precio": 120.00,
+        "cantidad": 15
+    },
+    {
+        "nombre": "Ventilador RGB para PC",
+        "precio": 20.00,
+        "cantidad": 50
+    },
+    {
+        "nombre": "Alfombrilla con Carga Inalámbrica",
+        "precio": 40.00,
+        "cantidad": 4
+    },
+    {
+        "nombre": "Cable DisplayPort 2m",
+        "precio": 15.00,
+        "cantidad": 80
+    },
+    {
+        "nombre": "Cargador Universal para Laptop",
+        "precio": 60.00,
+        "cantidad": 25
+    },
+    {
+        "nombre": "Switch Gigabit Ethernet",
+        "precio": 30.00,
+        "cantidad": 30
+    },
+    {
+        "nombre": "Adaptador USB-C a HDMI",
+        "precio": 25.00,
+        "cantidad": 50
+    },
+    {
+        "nombre": "SSD Externo 500GB",
+        "precio": 100.00,
+        "cantidad": 20
+    },
+    {
+        "nombre": "Monitor Curvo 27 pulgadas",
+        "precio": 250.00,
+        "cantidad": 2
+    },
+    {
+        "nombre": "Antena Wi-Fi USB",
+        "precio": 15.00,
+        "cantidad": 75
+    },
+    {
+        "nombre": "Repetidor Wi-Fi",
+        "precio": 35.00,
+        "cantidad": 40
+    },
+    {
+        "nombre": "Cable VGA 3m",
+        "precio": 12.00,
+        "cantidad": 100
+    },
+    {
+        "nombre": "Teclado Numérico USB",
+        "precio": 10.00,
+        "cantidad": 60
+    },
+    {
+        "nombre": "Caja de Herramientas para PC",
+        "precio": 40.00,
+        "cantidad": 3
+    }
+]
