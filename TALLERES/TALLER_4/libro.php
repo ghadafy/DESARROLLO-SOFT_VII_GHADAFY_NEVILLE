@@ -18,6 +18,6 @@ class Libro
     }
 }
 
-// Ejemplo de uso
+// Ejemplo de uso de la POO
 $miLibro = new Libro("Cien años de soledad", "Gabriel García Márquez", 1967);
 echo $miLibro->obtenerInformacion();
