@@ -1,0 +1,77 @@
+[
+    {
+        "id": 1,
+        "nombre": "Tecnología",
+        "descripcion": "Departamento encargado de desarrollar, implementar y mantener los sistemas tecnológicos de la empresa."
+    },
+    {
+        "id": 2,
+        "nombre": "Recursos Humanos",
+        "descripcion": "Se encarga de la gestión del personal, incluyendo reclutamiento, capacitación y bienestar de los empleados."
+    },
+    {
+        "id": 3,
+        "nombre": "Finanzas",
+        "descripcion": "Departamento responsable de la gestión financiera y contable, así como de la planificación presupuestaria."
+    },
+    {
+        "id": 4,
+        "nombre": "Marketing",
+        "descripcion": "Área enfocada en la promoción de productos y servicios, así como en la gestión de la marca y la publicidad."
+    },
+    {
+        "id": 5,
+        "nombre": "Ventas",
+        "descripcion": "Departamento encargado de las actividades comerciales y de la relación con los clientes para la venta de productos y servicios."
+    },
+    {
+        "id": 6,
+        "nombre": "Operaciones",
+        "descripcion": "Responsable de la planificación, producción y control de los procesos operativos dentro de la empresa."
+    },
+    {
+        "id": 7,
+        "nombre": "Servicio al Cliente",
+        "descripcion": "Área enfocada en la atención y soporte a los clientes, resolviendo problemas y gestionando la satisfacción del cliente."
+    },
+    {
+        "id": 8,
+        "nombre": "Legal",
+        "descripcion": "Encargado de la gestión legal y contractual, así como del cumplimiento de normativas y regulaciones."
+    },
+    {
+        "id": 9,
+        "nombre": "Compras",
+        "descripcion": "Área encargada de la adquisición de bienes y servicios necesarios para el funcionamiento de la empresa."
+    },
+    {
+        "id": 10,
+        "nombre": "Investigación y Desarrollo",
+        "descripcion": "Departamento dedicado a la innovación y desarrollo de nuevos productos o servicios."
+    },
+    {
+        "id": 11,
+        "nombre": "Calidad",
+        "descripcion": "Área que supervisa los estándares de calidad en los productos y procesos de la empresa."
+    },
+    {
+        "id": 12,
+        "nombre": "Proyectos",
+        "descripcion": "Responsable de la gestión y coordinación de proyectos dentro de la empresa, asegurando el cumplimiento de plazos y objetivos."
+    },
+    {
+        "id": 13,
+        "nombre": "Relaciones Públicas",
+        "descripcion": "Departamento encargado de la comunicación externa e interna, y de gestionar la imagen pública de la empresa."
+    },
+    {
+        "id": 14,
+        "nombre": "Logística",
+        "descripcion": "Se ocupa de la planificación y control del flujo de bienes y servicios, desde los proveedores hasta los clientes."
+    },
+    {
+        "id": 15,
+        "nombre": "Innovación",
+        "descripcion": "Área enfocada en buscar nuevas oportunidades de negocio a través de la innovación en productos, procesos y modelos de negocio."
+    }
+]

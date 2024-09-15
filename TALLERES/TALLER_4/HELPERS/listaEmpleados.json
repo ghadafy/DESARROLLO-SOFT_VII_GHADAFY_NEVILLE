@@ -1,0 +1,145 @@
+[
+    {
+        "id": 1,
+        "nombre_completo": "Sara Rodriguez",
+        "salario": 8000,
+        "evaluacion": 0,
+        "cargo": 25,
+        "departamento": 8,
+        "bono": 1000,
+        "anios_experiencia": null,
+        "lenguaje_dominante": null
+    },
+    {
+        "id": 2,
+        "nombre_completo": "Emily Carter",
+        "salario": 9500,
+        "evaluacion": 0,
+        "cargo": 23,
+        "departamento": 4,
+        "bono": 1200,
+        "anios_experiencia": null,
+        "lenguaje_dominante": null
+    },
+    {
+        "id": 4,
+        "nombre_completo": "Sophia Johnson",
+        "salario": 8500,
+        "evaluacion": 0,
+        "cargo": 13,
+        "departamento": 1,
+        "bono": 1100,
+        "anios_experiencia": null,
+        "lenguaje_dominante": null
+    },
+    {
+        "id": 5,
+        "nombre_completo": "James Wilson",
+        "salario": 9200,
+        "evaluacion": 0,
+        "cargo": 2,
+        "departamento": 6,
+        "bono": 1000,
+        "anios_experiencia": null,
+        "lenguaje_dominante": null
+    },
+    {
+        "id": 7,
+        "nombre_completo": "Noah Thompson",
+        "salario": 7600,
+        "evaluacion": 0,
+        "cargo": 2,
+        "departamento": 3,
+        "bono": 800,
+        "anios_experiencia": null,
+        "lenguaje_dominante": null
+    },
+    {
+        "id": 8,
+        "nombre_completo": "Isabella White",
+        "salario": 8200,
+        "evaluacion": 0,
+        "cargo": 25,
+        "departamento": 2,
+        "bono": 900,
+        "anios_experiencia": null,
+        "lenguaje_dominante": null
+    },
+    {
+        "id": 9,
+        "nombre_completo": "Lucas Lewis",
+        "salario": 8800,
+        "evaluacion": 0,
+        "cargo": 24,
+        "departamento": 4,
+        "bono": 1100,
+        "anios_experiencia": null,
+        "lenguaje_dominante": null
+    },
+    {
+        "id": 10,
+        "nombre_completo": "Mia Walker",
+        "salario": 9000,
+        "evaluacion": 0,
+        "cargo": 30,
+        "departamento": 7,
+        "bono": 1200,
+        "anios_experiencia": null,
+        "lenguaje_dominante": null
+    },
+    {
+        "id": 11,
+        "nombre_completo": "Ethan Harris",
+        "salario": 7700,
+        "evaluacion": 0,
+        "cargo": 19,
+        "departamento": 3,
+        "bono": 950,
+        "anios_experiencia": null,
+        "lenguaje_dominante": null
+    },
+    {
+        "id": 12,
+        "nombre_completo": "Charlotte Allen",
+        "salario": 8400,
+        "evaluacion": 0,
+        "cargo": 15,
+        "departamento": 8,
+        "bono": 1000,
+        "anios_experiencia": null,
+        "lenguaje_dominante": null
+    },
+    {
+        "id": 13,
+        "nombre_completo": "Aiden Young",
+        "salario": 8900,
+        "evaluacion": 0,
+        "cargo": 20,
+        "departamento": 6,
+        "bono": 1150,
+        "anios_experiencia": null,
+        "lenguaje_dominante": null
+    },
+    {
+        "id": 14,
+        "nombre_completo": "Amelia King",
+        "salario": 9300,
+        "evaluacion": 0,
+        "cargo": 27,
+        "departamento": 5,
+        "bono": 1400,
+        "anios_experiencia": null,
+        "lenguaje_dominante": null
+    },
+    {
+        "id": 15,
+        "nombre_completo": "Ghadafy xxx",
+        "salario": "2000",
+        "bono": null,
+        "evaluacion": null,
+        "cargo": "10",
+        "departamento": "13",
+        "anios_experiencia": "10",
+        "lenguaje_dominante": "13"
+    }
+]

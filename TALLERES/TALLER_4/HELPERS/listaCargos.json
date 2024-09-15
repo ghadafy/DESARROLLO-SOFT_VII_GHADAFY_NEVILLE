@@ -1,0 +1,122 @@
+[
+    {
+        "id": 1,
+        "cargo": "Gerente de Tecnología"
+    },
+    {
+        "id": 2,
+        "cargo": "Gerente de Recursos Humanos"
+    },
+    {
+        "id": 3,
+        "cargo": "Gerente de Finanzas"
+    },
+    {
+        "id": 4,
+        "cargo": "Desarrollador"
+    },
+    {
+        "id": 5,
+        "cargo": "Representante de Ventas"
+    },
+    {
+        "id": 6,
+        "cargo": "Gerente de Ventas"
+    },
+    {
+        "id": 7,
+        "cargo": "Administrador de Sistemas"
+    },
+    {
+        "id": 8,
+        "cargo": "Especialista en Marketing Digital"
+    },
+    {
+        "id": 9,
+        "cargo": "Gerente de Operaciones"
+    },
+    {
+        "id": 10,
+        "cargo": "Analista Financiero"
+    },
+    {
+        "id": 11,
+        "cargo": "Coordinador de Proveedores"
+    },
+    {
+        "id": 12,
+        "cargo": "Gerente de Compras"
+    },
+    {
+        "id": 13,
+        "cargo": "Analista de Seguridad Informática"
+    },
+    {
+        "id": 14,
+        "cargo": "Ingeniero de Redes"
+    },
+    {
+        "id": 15,
+        "cargo": "Gerente de Proyectos"
+    },
+    {
+        "id": 16,
+        "cargo": "Coordinador de Capacitación"
+    },
+    {
+        "id": 17,
+        "cargo": "Contador"
+    },
+    {
+        "id": 18,
+        "cargo": "Auditor de Calidad"
+    },
+    {
+        "id": 19,
+        "cargo": "Gerente de Calidad"
+    },
+    {
+        "id": 20,
+        "cargo": "Inspector de Calidad"
+    },
+    {
+        "id": 21,
+        "cargo": "Coordinador de Logística"
+    },
+    {
+        "id": 22,
+        "cargo": "Especialista en Soporte Técnico"
+    },
+    {
+        "id": 23,
+        "cargo": "Gerente de Investigación y Desarrollo"
+    },
+    {
+        "id": 24,
+        "cargo": "Gerente de Servicio al Cliente"
+    },
+    {
+        "id": 25,
+        "cargo": "Consultor Legal"
+    },
+    {
+        "id": 26,
+        "cargo": "Secretaria"
+    },
+    {
+        "id": 27,
+        "cargo": "Gerente de Servicios Domesticos"
+    },
+    {
+        "id": 28,
+        "cargo": "Aseador"
+    },
+    {
+        "id": 29,
+        "cargo": "Archivador"
+    },
+    {
+        "id": 30,
+        "cargo": "Mensajero"
+    }
+]
