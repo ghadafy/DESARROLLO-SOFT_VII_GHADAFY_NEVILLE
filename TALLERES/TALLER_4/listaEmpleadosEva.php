@@ -17,7 +17,7 @@ foreach ($emps as $atrib) {
 
     if ((in_array($atrib['cargo'], $array_desarrollador) ||  in_array($atrib['cargo'], $array_gerentes)) && (in_array($atrib['evaluacion'], [4, 5]))) {
 
-        $eval = "<a href='procesarAumento.php?cod={$atrib['id']}&nom={$atrib['nombre_completo']}&sal={$atrib['salario']}&dep={$atrib['cargo']}&car={$atrib['departamento']}&len={$atrib['anios_experiencia']}&ani={$atrib['lenguaje_dominante']}'>PROCESAR AUMENTO</a>";
+        $eval = "<a class='ver' href='procesarAumento.php?cod={$atrib['id']}&nom={$atrib['nombre_completo']}&sal={$atrib['salario']}&dep={$atrib['cargo']}&car={$atrib['departamento']}&len={$atrib['anios_experiencia']}&ani={$atrib['lenguaje_dominante']}'>PROCESAR AUMENTO</a>";
 
         echo "<tr><td class='cod'>" . $atrib['id'] . "</td><td class='articulo'>" . $atrib['nombre_completo'] . "</td><td class='descripcion'>" . $atrib['salario'] . "</td><td class='cod'>" . $eval . "</td></tr>";
     }

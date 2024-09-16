@@ -13,13 +13,13 @@
     {
         "id": 2,
         "nombre_completo": "Emily Carter",
-        "salario": 9500,
-        "evaluacion": 0,
-        "cargo": 23,
-        "departamento": 4,
-        "bono": 1200,
-        "anios_experiencia": null,
-        "lenguaje_dominante": null
+        "salario": 10000,
+        "evaluacion": "4",
+        "cargo": "4",
+        "departamento": "23",
+        "bono": null,
+        "anios_experiencia": "4",
+        "lenguaje_dominante": "23"
     },
     {
         "id": 4,
@@ -36,7 +36,7 @@
         "id": 5,
         "nombre_completo": "James Wilson",
         "salario": 9200,
-        "evaluacion": 0,
+        "evaluacion": "3",
         "cargo": 2,
         "departamento": 6,
         "bono": 1000,
@@ -90,13 +90,13 @@
     {
         "id": 11,
         "nombre_completo": "Ethan Harris",
-        "salario": 7700,
-        "evaluacion": 0,
-        "cargo": 19,
-        "departamento": 3,
-        "bono": 950,
-        "anios_experiencia": null,
-        "lenguaje_dominante": null
+        "salario": 300,
+        "evaluacion": null,
+        "cargo": "3",
+        "departamento": "19",
+        "bono": null,
+        "anios_experiencia": "3",
+        "lenguaje_dominante": "19"
     },
     {
         "id": 12,

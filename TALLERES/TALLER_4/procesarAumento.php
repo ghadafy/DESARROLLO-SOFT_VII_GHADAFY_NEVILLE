@@ -12,11 +12,12 @@ if (isset($_GET['cod'])) {
     if (in_array($cod, $array_desarrollador)) {
         include_once('CLASES/desarrollador.php');
         $empl = new Desarrollador($cod, $_GET['nom'], $_GET['sal'], $_GET['dep'], $_GET['car'], $_GET['len'], $_GET['ani']);
-    }
-
-    if (in_array($cod, $array_gerentes)) {
+    } elseif (in_array($cod, $array_gerentes)) {
         include_once('CLASES/gerente.php');
         $empl = new Gerente($cod, $_GET['nom'], $_GET['sal'], $_GET['dep'], $_GET['car'], 0);
+    } else {
+        include_once('CLASES/empleado.php');
+        $empl = new Empleado($cod, $_GET['nom'], $_GET['sal'], $_GET['dep'], $_GET['car']);
     }
 
     $pers = $empl->getInformacionEmpleado();
@@ -29,7 +30,9 @@ if (isset($_GET['cod'])) {
 
 //Aqui realizo acciones si se envia el formulario
 if (isset($_POST['form_aumentar']) && $_POST['form_aumentar'] === 'aumentar') {
-    $empl->setEvaluacion($_POST['nivel']);
+
+    $nuevoSalario = $_POST['sal'] +  $empl->getSalarioBase();
+    $empl->setSalarioBase($nuevoSalario);
 
     // Definir la ruta del archivo JSON
     $archivo = 'HELPERS/listaEmpleados.json';
@@ -44,11 +47,11 @@ if (isset($_POST['form_aumentar']) && $_POST['form_aumentar'] === 'aumentar') {
 
     // Nuevos datos para el empleado
     $nuevosDatos = [
-        'nombre_completo' => $emp->getNombre(),
-        'salario' => $emp->getSalarioBase(),
-        'evaluacion' => $emp->getEvaluacion(),
-        'cargo' => $emp->getCargo(),
-        'departamento' => $emp->getDepartamento()
+        'nombre_completo' => $empl->getNombre(),
+        'salario' => $empl->getSalarioBase(),
+        'evaluacion' => $empl->getEvaluacion(),
+        'cargo' => $empl->getCargo(),
+        'departamento' => $empl->getDepartamento()
     ];
 
 
@@ -57,14 +60,14 @@ if (isset($_POST['form_aumentar']) && $_POST['form_aumentar'] === 'aumentar') {
     foreach ($empleados as &$empleado) {
         if ($empleado['id'] == $idModificar) {
             // Actualizar los campos del empleado
-            $empleado['nombre_completo'] = $nuevosDatos['nombre_completo'];
+            $empleado['nombre_completo'] = $empleado['nombre_completo'];
             $empleado['salario'] = $nuevosDatos['salario'];
-            $empleado['evaluacion'] = $nuevosDatos['evaluacion'];
-            $empleado['cargo'] = $nuevosDatos['cargo'];
-            $empleado['departamento'] = $nuevosDatos['departamento'];
-            $empleado['bono'] = $nuevosDatos['bono'];
-            $empleado['anios_experiencia'] = $nuevosDatos['cargo'];
-            $empleado['lenguaje_dominante'] = $nuevosDatos['departamento'];
+            $empleado['evaluacion'] =  $empleado['evaluacion'];
+            $empleado['cargo'] = $empleado['cargo'];
+            $empleado['departamento'] =  $empleado['departamento'];
+            $empleado['bono'] = $empleado['bono'];
+            $empleado['anios_experiencia'] = $empleado['anios_experiencia'];
+            $empleado['lenguaje_dominante'] =  $empleado['lenguaje_dominante'];
 
 
             break; // Salir del bucle una vez modificado
@@ -86,11 +89,11 @@ if (isset($_POST['form_aumentar']) && $_POST['form_aumentar'] === 'aumentar') {
 
 <form action="" method="post">
     <fieldset>
-        <legend>PROCESO DE AUMENTO DE SALARIO</legend>
+        <legend class="legend">PROCESO DE AUMENTO DE SALARIO</legend>
         <label for="nombre">
-            Monto que se Aumentara
+            Monto que se Aumentara a: <?php echo '<br>' . $pers . '<br>'; ?>
         </label>
-        <input type="text" name="sal" id="sal" placeholder="Ingrese aquí el Monto Directo por aumentar">
+        <input type="text" name="sal" id="sal" class="sal" placeholder="Ingrese aquí el Monto Directo por aumentar" size="40" required>
 
 
     </fieldset>

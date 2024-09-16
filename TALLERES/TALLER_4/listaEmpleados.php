@@ -41,7 +41,7 @@ foreach ($emps as $atrib) {
     if (in_array($atrib['cargo'], $array_desarrollador) ||  in_array($atrib['cargo'], $array_gerentes)) {
 
 
-        $eval = "<a href='evaluacion.php?cod={$atrib['id']}&nom={$atrib['nombre_completo']}&sal={$atrib['salario']}&dep={$atrib['cargo']}&car={$atrib['departamento']}&len={$atrib['anios_experiencia']}&ani={$atrib['lenguaje_dominante']}'>SI</a>";
+        $eval = "<a class='ver' href='evaluacion.php?cod={$atrib['id']}&nom={$atrib['nombre_completo']}&sal={$atrib['salario']}&dep={$atrib['cargo']}&car={$atrib['departamento']}&len={$atrib['anios_experiencia']}&ani={$atrib['lenguaje_dominante']}'>SI</a>";
     } else {
         $eval = "NO";
     }

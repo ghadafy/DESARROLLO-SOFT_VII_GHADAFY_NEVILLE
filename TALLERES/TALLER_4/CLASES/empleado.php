@@ -8,7 +8,7 @@ class Empleado
     private $salarioBase;
     private $departamento;
     private $cargo;
-    private $evaluacion = 0;
+    private $evaluacion;
 
     public function __construct($id, $nombre, $salarioBase, $departamento, $cargo)
     {

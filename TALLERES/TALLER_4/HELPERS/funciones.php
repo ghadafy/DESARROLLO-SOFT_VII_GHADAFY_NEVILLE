@@ -8,6 +8,8 @@ $titulo = [
 
     'listaEmpleados' => 'Lista de Empleados',
 
+    'listaEmpleadosEva' => 'Empleados para Aumento',
+
     'emp' => 'Agregar Empleados',
 
     'reportes' => 'Reportes'
@@ -56,12 +58,96 @@ function verContenido($arreglo)
     echo "<table class='departamentos'>";
     echo "<tr><th>CODIGO</th><th> DEPARTAMENTOS </th><th> FUNCIONES </th></tr>";
 
-    //si llamamos a la funcion y no le pasamos el stock nos muestra todo el resumen
-
     foreach ($obj as $atrib) {
 
         echo "<tr><td class='cod'>" . $atrib['id'] . "</td><td class='articulo'>" . $atrib['nombre'] . "</td><td class='descripcion'>" . $atrib['descripcion'] . "</td></tr>";
     }
 
+    echo "</table>";
+}
+
+
+
+
+function verContenidoFiltrado($filtro)
+{
+
+    $acumulador = 0;
+    $contador = 0;
+    $promedio = 0;
+    $listaEmpleados = file_get_contents('HELPERS/listaEmpleados.json');
+    $listaDepartamentos = file_get_contents('HELPERS/listaDepartamentos.json');
+    $deptos = json_decode($listaDepartamentos, true);
+
+    $obj = json_decode($listaEmpleados, true);
+
+    echo "<table class='departamentos'>";
+    echo "<tr><th>DEPARTAMENTO </th><th> EMPLEADO</th><th> SALARIO </th></tr>";
+
+    foreach ($obj as $atrib) {
+        if ($atrib['departamento'] == $filtro) {
+
+
+            foreach ($deptos as $departamento) {
+                if ($departamento['id'] == $atrib['departamento']) {
+                    $dept = $departamento['nombre'];
+                }
+            }
+
+            echo "<tr><td>" . $dept . "</td><td class='articulo'>" . $atrib['nombre_completo'] . "</td><td class='salario'>" . $atrib['salario'] . "</td></tr>";
+            $contador++;
+            $acumulador += $atrib['salario'];
+        }
+    }
+    if ($contador > 0) {
+        $promedio = $acumulador / $contador;
+    } else {
+        $promedio = 0;
+    }
+    echo "<tr><th  colspan=2> SALARIO PROMEDIO </th><th>" . number_format($promedio, 2) . "</th></tr>";
+    echo "</table>";
+}
+
+
+
+
+
+
+function verContenidoFiltradoCargo($filtro)
+{
+
+    $acumulador = 0;
+    $contador = 0;
+    $promedio = 0;
+    $listaEmpleados = file_get_contents('HELPERS/listaEmpleados.json');
+    $listaCargos = file_get_contents('HELPERS/listaCargos.json');
+    $cargos = json_decode($listaCargos, true);
+
+    $obj = json_decode($listaEmpleados, true);
+
+    echo "<table class='departamentos'>";
+    echo "<tr><th>CARGO</th><th> EMPLEADO</th><th> SALARIO </th></tr>";
+
+    foreach ($obj as $atrib) {
+        if ($atrib['cargo'] == $filtro) {
+
+            foreach ($cargos as $cargo) {
+                if ($cargo['id'] == $atrib['cargo']) {
+                    $carg = $cargo['cargo'];
+                }
+            }
+
+
+            echo "<tr><td>" . $carg . "</td><td class='articulo'>" . $atrib['nombre_completo'] . "</td><td class='salario'>" . $atrib['salario'] . "</td></tr>";
+            $contador++;
+            $acumulador += $atrib['salario'];
+        }
+    }
+    if ($contador > 0) {
+        $promedio = $acumulador / $contador;
+    } else {
+        $promedio = 0;
+    }
+    echo "<tr><th colspan=2> SALARIO PROMEDIO </th><th>" . number_format($promedio, 2) . "</th></tr>";
     echo "</table>";
 }

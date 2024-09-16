@@ -85,26 +85,26 @@ if (isset($_POST['form_registrar']) && $_POST['form_registrar'] === 'registrar')
     <label for="id">
         Codigo de Empleado
     </label>
-    <input type="text" name="id" id="id" placeholder="Ingrese aquí el Codigo de Empleado">
+    <input type="text" name="id" id="id" placeholder="Ingrese aquí el Codigo de Empleado" required>
 
 
     <label for="nombre">
         Nombre de Empleado
     </label>
-    <input type="text" name="nombre" id="nombre" placeholder="Ingrese aquí el Nombre del Empleado">
+    <input type="text" name="nombre" id="nombre" placeholder="Ingrese aquí el Nombre del Empleado" required>
 
 
 
     <label for="salario">
         Salario Mensual Base
     </label>
-    <input type="text" name="salario" id="salario" placeholder="Ingrese aquí el Salario">
+    <input type="text" name="salario" id="salario" placeholder="Ingrese aquí el Salario" required>
 
 
     <label for="departamento">
         Departamento de Empleado
     </label>
-    <select name="departamento" id="departamento">
+    <select name="departamento" id="departamento" required>
 
         <?php
         $deptos = json_decode($departamentos, true);
@@ -120,7 +120,7 @@ if (isset($_POST['form_registrar']) && $_POST['form_registrar'] === 'registrar')
         Cargo de Empleado
     </label>
 
-    <select name="cargo" id="cargo">
+    <select name="cargo" id="cargo" required>
         <?php
         $datos = json_decode($cargos, true);
 
