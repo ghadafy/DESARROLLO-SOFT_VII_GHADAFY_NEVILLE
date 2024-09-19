@@ -143,11 +143,57 @@ imprimirBiblioteca($resultadosBusqueda);
 // 11. TAREA: Crea una función que genere un reporte de la biblioteca
 // El reporte debe incluir: número total de libros, número de libros prestados,
 // número de libros por género, y el autor con más libros en la biblioteca
+
 function generarReporteBiblioteca($biblioteca)
 {
-    // Tu código aquí
+    // Número total de libros
+    $totalLibros = count($biblioteca);
+
+    // Número de libros prestados
+    $librosPrestados = count(array_filter($biblioteca, fn ($libro) => $libro['prestado']));
+
+    // Número de libros por género
+    $librosPorGenero = [];
+    foreach ($biblioteca as $libro) {
+        $genero = $libro['genero'];
+        if (!isset($librosPorGenero[$genero])) {
+            $librosPorGenero[$genero] = 0;
+        }
+        $librosPorGenero[$genero]++;
+    }
+
+    // Autor con más libros en la biblioteca
+    $librosPorAutor = [];
+    foreach ($biblioteca as $libro) {
+        $autor = $libro['autor'];
+        if (!isset($librosPorAutor[$autor])) {
+            $librosPorAutor[$autor] = 0;
+        }
+        $librosPorAutor[$autor]++;
+    }
+    arsort($librosPorAutor);
+    $autorConMasLibros = key($librosPorAutor);
+
+    // Generar reporte
+    $reporte = [
+        'totalLibros' => $totalLibros,
+        'librosPrestados' => $librosPrestados,
+        'librosPorGenero' => $librosPorGenero,
+        'autorConMasLibros' => $autorConMasLibros,
+        'cantidadLibrosAutor' => $librosPorAutor[$autorConMasLibros]
+    ];
+
+    return $reporte;
 }
 
 // Ejemplo de uso de la función de reporte (descomenta para probar)
 // echo "Reporte de la Biblioteca:\n";
-// print_r(generarReporteBiblioteca($biblioteca));
+echo "Reporte de la Biblioteca:<br><br>";
+$reporte = generarReporteBiblioteca($biblioteca);
+echo "Número total de libros: {$reporte['totalLibros']}<br>";
+echo "Número de libros prestados: {$reporte['librosPrestados']}<br>";
+echo "Número de libros por género:<br>";
+foreach ($reporte['librosPorGenero'] as $genero => $cantidad) {
+    echo "- $genero: $cantidad libros<br>";
+}
+echo "Autor con más libros: {$reporte['autorConMasLibros']} ({$reporte['cantidadLibrosAutor']} libros)<br>";
