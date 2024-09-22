@@ -10,7 +10,7 @@ class Estudiante
     private array $materias = [];
 
     // Constructor 
-    public function __construct(int $id, string $nombre, int $edad, string $carrera)
+    public function __construct($id, $nombre, $edad, $carrera)
     {
         $this->id = $id;
         $this->nombre = $nombre;
@@ -19,13 +19,13 @@ class Estudiante
     }
 
     // Método para añadir una materia y su calificación
-    public function agregarMateria(string $materia, float $calificacion): void
+    public function agregarMateria($materia, $calificacion)
     {
         $this->materias[$materia] = $calificacion;
     }
 
     // Método para calcular y retornar el promedio de calificaciones
-    public function obtenerPromedio(): float
+    public function obtenerPromedio()
     {
         if (empty($this->materias)) {
             return 0;
@@ -34,7 +34,7 @@ class Estudiante
     }
 
     // Método para retornar un arreglo asociativo con toda la información del estudiante
-    public function obtenerDetalles(): array
+    public function obtenerDetalles()
     {
         return [
             'id' => $this->id,
@@ -105,7 +105,7 @@ class SistemaGestionEstudiantes
     }
 
     // Método para generar un reporte de rendimiento
-    public function generarReporteRendimiento(): array
+    public function generarReporteRendimiento()
     {
         $materiasReport = [];
         foreach ($this->estudiantes as $estudiante) {
@@ -126,7 +126,7 @@ class SistemaGestionEstudiantes
     }
 
     // Método para graduar a un estudiante y eliminarlo del sistema
-    public function graduarEstudiante(int $id): void
+    public function graduarEstudiante(int $id)
     {
         if (isset($this->estudiantes[$id])) {
             $this->graduados[$id] = $this->estudiantes[$id];
