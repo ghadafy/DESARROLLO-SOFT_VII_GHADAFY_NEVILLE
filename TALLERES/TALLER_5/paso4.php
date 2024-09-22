@@ -54,7 +54,7 @@ function imprimirBiblioteca($libros)
     echo "<br><br>";
 }
 
-echo "Biblioteca original:\n";
+echo "Biblioteca original:<br>";
 echo "<br><br>";
 imprimirBiblioteca($biblioteca);
 
@@ -63,7 +63,7 @@ usort($biblioteca, function ($a, $b) {
     return $a['año'] - $b['año'];
 });
 
-echo "Libros ordenados por año de publicación:\n";
+echo "Libros ordenados por año de publicación:<br>";
 imprimirBiblioteca($biblioteca);
 
 // 4. Ordenar libros alfabéticamente por título
@@ -71,7 +71,7 @@ usort($biblioteca, function ($a, $b) {
     return strcmp($a['titulo'], $b['titulo']);
 });
 
-echo "Libros ordenados alfabéticamente por título:\n";
+echo "Libros ordenados alfabéticamente por título:<br>";
 imprimirBiblioteca($biblioteca);
 
 // 5. Filtrar libros disponibles (no prestados)
@@ -140,9 +140,32 @@ $resultadosBusqueda = buscarLibros($biblioteca, $libro);
 echo "Resultados de búsqueda para {$libro}:<br>";
 imprimirBiblioteca($resultadosBusqueda);
 
+echo "SECCION DE REPORTE";
 // 11. TAREA: Crea una función que genere un reporte de la biblioteca
 // El reporte debe incluir: número total de libros, número de libros prestados,
 // número de libros por género, y el autor con más libros en la biblioteca
+
+echo "<br><br>Cantidad de libros<br>";
+function totalDeLibros($arreglo)
+{
+    $cantidadLibros = 0;
+    $genero = array();
+    foreach ($arreglo as $libro => $item) {
+        array_push($genero, $item['genero']);
+    }
+    /*
+    $cantidadPrestados = 0;
+    foreach ($arreglo as $item) {
+        $cantidadLibros = count($item);
+        if ($item['pestado'])
+            $cantidadPrestados++;
+    }
+    */
+
+    return $genero;
+}
+echo totalDeLibros($biblioteca);
+
 
 function generarReporteBiblioteca($biblioteca)
 {
@@ -187,7 +210,7 @@ function generarReporteBiblioteca($biblioteca)
 }
 
 // Ejemplo de uso de la función de reporte (descomenta para probar)
-// echo "Reporte de la Biblioteca:\n";
+// echo "Reporte de la Biblioteca:<br>";
 echo "Reporte de la Biblioteca:<br><br>";
 $reporte = generarReporteBiblioteca($biblioteca);
 echo "Número total de libros: {$reporte['totalLibros']}<br>";
