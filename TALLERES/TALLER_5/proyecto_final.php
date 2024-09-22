@@ -60,25 +60,25 @@ class SistemaGestionEstudiantes
     private array $graduados = [];
 
     // Método para añadir un nuevo estudiante al sistema
-    public function agregarEstudiante(Estudiante $estudiante): void
+    public function agregarEstudiante(Estudiante $estudiante)
     {
         $this->estudiantes[$estudiante->obtenerDetalles()['id']] = $estudiante;
     }
 
     // Método para obtener un estudiante por su ID
-    public function obtenerEstudiante(int $id): ?Estudiante
+    public function obtenerEstudiante($id): ?Estudiante
     {
         return $this->estudiantes[$id] ?? null;
     }
 
     // Método para listar todos los estudiantes
-    public function listarEstudiantes(): array
+    public function listarEstudiantes()
     {
         return $this->estudiantes;
     }
 
     // Método para calcular el promedio general de todos los estudiantes
-    public function calcularPromedioGeneral(): float
+    public function calcularPromedioGeneral()
     {
         if (empty($this->estudiantes)) {
             return 0;
@@ -88,9 +88,9 @@ class SistemaGestionEstudiantes
     }
 
     // Método para obtener estudiantes de una carrera específica
-    public function obtenerEstudiantesPorCarrera(string $carrera): array
+    public function obtenerEstudiantesPorCarrera($carrera)
     {
-        return array_filter($this->estudiantes, fn ($est) => $est->obtenerDetalles()['carrera'] === $carrera);
+        return array_filter($this->estudiantes, fn ($est) => $est->obtenerDetalles()['carrera'] == $carrera);
     }
 
     // Método para obtener el estudiante con el promedio más alto
@@ -107,26 +107,26 @@ class SistemaGestionEstudiantes
     // Método para generar un reporte de rendimiento
     public function generarReporteRendimiento()
     {
-        $materiasReport = [];
+        $materiasReporte = [];
         foreach ($this->estudiantes as $estudiante) {
             foreach ($estudiante->obtenerDetalles()['materias'] as $materia => $calificacion) {
-                if (!isset($materiasReport[$materia])) {
-                    $materiasReport[$materia] = ['total' => 0, 'count' => 0, 'max' => $calificacion, 'min' => $calificacion];
+                if (!isset($materiasReporte[$materia])) {
+                    $materiasReporte[$materia] = ['total' => 0, 'count' => 0, 'max' => $calificacion, 'min' => $calificacion];
                 }
-                $materiasReport[$materia]['total'] += $calificacion;
-                $materiasReport[$materia]['count']++;
-                $materiasReport[$materia]['max'] = max($materiasReport[$materia]['max'], $calificacion);
-                $materiasReport[$materia]['min'] = min($materiasReport[$materia]['min'], $calificacion);
+                $materiasReporte[$materia]['total'] += $calificacion;
+                $materiasReporte[$materia]['count']++;
+                $materiasReporte[$materia]['max'] = max($materiasReporte[$materia]['max'], $calificacion);
+                $materiasReporte[$materia]['min'] = min($materiasReporte[$materia]['min'], $calificacion);
             }
         }
-        foreach ($materiasReport as $materia => &$data) {
+        foreach ($materiasReporte as $materia => $data) {
             $data['promedio'] = $data['total'] / $data['count'];
         }
-        return $materiasReport;
+        return $materiasReporte;
     }
 
     // Método para graduar a un estudiante y eliminarlo del sistema
-    public function graduarEstudiante(int $id)
+    public function graduarEstudiante($id)
     {
         if (isset($this->estudiantes[$id])) {
             $this->graduados[$id] = $this->estudiantes[$id];
@@ -135,14 +135,14 @@ class SistemaGestionEstudiantes
     }
 
     // Método para generar el ranking de estudiantes por su promedio
-    public function generarRanking(): array
+    public function generarRanking()
     {
         usort($this->estudiantes, fn ($a, $b) => $b->obtenerPromedio() <=> $a->obtenerPromedio());
         return $this->estudiantes;
     }
 
     // Método para buscar estudiantes por nombre o carrera
-    public function buscarEstudiantes(string $termino): array
+    public function buscarEstudiantes($termino)
     {
         return array_filter($this->estudiantes, function ($est) use ($termino) {
             $detalles = $est->obtenerDetalles();
@@ -151,7 +151,7 @@ class SistemaGestionEstudiantes
     }
 
     // Método para generar estadísticas por carrera
-    public function generarEstadisticasPorCarrera(): array
+    public function generarEstadisticasPorCarrera()
     {
         $estadisticas = [];
         foreach ($this->estudiantes as $estudiante) {
@@ -217,30 +217,63 @@ foreach ($estudiantes as $estudiante) {
 }
 
 // Demostración de funcionalidades
-echo "Lista de estudiantes:<br>";
-print_r($sistema->listarEstudiantes());
+echo "<b>Lista de estudiantes:</b><br>";
+foreach ($sistema->listarEstudiantes()  as $estudiante => $valor) {
+    echo $valor . "<br>";
+}
 
-echo "<br>Promedio general de todos los estudiantes: ";
+
+echo "<br><b>Promedio general de todos los estudiantes:</b> ";
 echo number_format($sistema->calcularPromedioGeneral(), 2) . "<br>";
 
-echo "<br>Estudiantes de la carrera de Ingeniería:<br>";
-print_r($sistema->obtenerEstudiantesPorCarrera("Ingeniería"));
 
-echo "<br>Mejor estudiante del sistema:<br>";
+echo "<br><b>Estudiantes de la carrera de Ingeniería:</b><br>";
+foreach ($sistema->obtenerEstudiantesPorCarrera("Ingeniería") as $est => $nombre) {
+    echo $nombre . "<br>";
+}
+
+echo "<br><b>Mejor estudiante del sistema:</b><br>";
 echo $sistema->obtenerMejorEstudiante() . "<br>";
 
-echo "<br>Reporte de rendimiento por materias:<br>";
-print_r($sistema->generarReporteRendimiento());
 
-echo "<br>Graduando al estudiante con ID 1...<br>";
+echo "<br><b>Reporte de rendimiento por materias:</b><br>";
+foreach ($sistema->generarReporteRendimiento() as $mat => $rendimiento) {
+    echo $mat . " => " . implode(" - ", $rendimiento) . "<br>";
+}
+
+echo "<br><b>Graduando al estudiante con ID 1...</b><br>";
 $sistema->graduarEstudiante(1);
-print_r($sistema->listarEstudiantes());
+foreach ($sistema->listarEstudiantes()  as $estudiante => $valor) {
+    echo $valor . "<br>";
+}
 
-echo "<br>Ranking de estudiantes por promedio:<br>";
-print_r($sistema->generarRanking());
+echo "<br><b>Ranking de estudiantes por promedio:</b><br>";
+foreach ($sistema->generarRanking() as $ests) {
+    echo $ests . "<br>";
+}
 
-echo "<br>Búsqueda de estudiantes por 'Derecho':<br>";
-print_r($sistema->buscarEstudiantes("Derecho"));
+
+echo "<br><b>Búsqueda de estudiantes por 'Derecho':</b><br>";
+foreach ($sistema->buscarEstudiantes("Derecho") as $est) {
+    echo $est . "<br>";
+}
+
 
 echo "<br>Estadísticas por carrera:<br>";
-print_r($sistema->generarEstadisticasPorCarrera());
+foreach ($sistema->generarEstadisticasPorCarrera() as $carrera => $estad) {
+    echo "<br><b>$carrera</b><br>";
+    foreach ($estad as $valor => $dato) {
+        if ($valor === "count") {
+            echo "*  <b>Cantidad de Estudiantes</b>: " . $dato . "<br>";
+        } elseif ($valor === "mejorEstudiante") {
+            echo "*  <b>Mejor Estudiante</b>: " . $dato . "<br>";
+        } elseif ($valor === "promedioGeneral") {
+            echo "*  <b>Promedio General</b>: " . number_format($dato, 2) . "<br>";
+        }
+        /*
+totalPromedio => 255.5
+mejorEstudiante => Pedro Martínez, Carrera: Derecho, Promedio: 91.50
+promedioGeneral => 85.166666666667
+*/
+    }
+}
