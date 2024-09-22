@@ -30,14 +30,14 @@ function promedioVentas($ventas)
 }
 
 // 3. Calcular y mostrar el promedio de ventas por región y producto
-echo "Promedio de ventas por región y producto:\n";
+echo "Promedio de ventas por región y producto:<br>";
 foreach ($ventas as $region => $productos) {
-    echo "$region:\n";
+    echo "$region:<br>";
     foreach ($productos as $producto => $ventasProducto) {
         $promedio = promedioVentas($ventasProducto);
-        echo "  $producto: " . number_format($promedio, 2) . "\n";
+        echo "  $producto: " . number_format($promedio, 2) . "<br>";
     }
-    echo "\n";
+    echo "<br>";
 }
 
 // 4. Función para encontrar el producto más vendido en una región
@@ -46,9 +46,9 @@ function productoMasVendido($productos)
     $maxVentas = 0;
     $productoTop = '';
     foreach ($productos as $producto => $ventas) {
-        $totalVentas = array_sum($ventas);
-        if ($totalVentas > $maxVentas) {
-            $maxVentas = $totalVentas;
+        $total_ventas = array_sum($ventas);
+        if ($total_ventas > $maxVentas) {
+            $maxVentas = $total_ventas;
             $productoTop = $producto;
         }
     }
@@ -56,10 +56,10 @@ function productoMasVendido($productos)
 }
 
 // 5. Encontrar y mostrar el producto más vendido por región
-echo "Producto más vendido por región:\n";
+echo "Producto más vendido por región:<br>";
 foreach ($ventas as $region => $productos) {
     [$productoTop, $ventasTop] = productoMasVendido($productos);
-    echo "$region: $productoTop (Total: $ventasTop)\n";
+    echo "$region: $productoTop (Total: $ventasTop)<br>";
 }
 
 // 6. Calcular las ventas totales por producto
@@ -73,10 +73,10 @@ foreach ($ventas as $region => $productos) {
     }
 }
 
-echo "\nVentas totales por producto:\n";
+echo "<br>Ventas totales por producto:<br>";
 arsort($ventasTotalesPorProducto);
 foreach ($ventasTotalesPorProducto as $producto => $total) {
-    echo "$producto: $total\n";
+    echo "$producto: $total<br>";
 }
 
 // 7. Encontrar la región con mayores ventas totales
@@ -85,36 +85,36 @@ $ventasTotalesPorRegion = array_map(function ($productos) {
 }, $ventas);
 
 $regionTopVentas = array_keys($ventasTotalesPorRegion, max($ventasTotalesPorRegion))[0];
-echo "\nRegión con mayores ventas totales: $regionTopVentas\n";
+echo "<br>Región con mayores ventas totales: $regionTopVentas<br>";
 
 // TAREA: Implementa una función que analice el crecimiento de ventas
 // Calcula y muestra el porcentaje de crecimiento de ventas del primer al último mes
 // para cada producto en cada región. Identifica el producto y la región con mayor crecimiento.
 // Tu código aquí
 
-// 8. Función para calcular el porcentaje de crecimiento
+// Función para calcular el porcentaje de crecimiento
 function calcularCrecimiento($ventas)
 {
     $primeraVenta = $ventas[0];
     $ultimaVenta = end($ventas);
     if ($primeraVenta == 0) {
-        // Evitar división por cero
         return 0;
+    } else {
+        return (($ultimaVenta - $primeraVenta) / $primeraVenta) * 100;
     }
-    return (($ultimaVenta - $primeraVenta) / $primeraVenta) * 100;
 }
 
-// 9. Analizar el crecimiento de ventas por región y producto
-echo "\nCrecimiento de ventas del primer al último mes por región y producto:\n";
-$mayorCrecimiento = -INF;
+// Analizar el crecimiento de ventas por región y producto
+echo "<br>Crecimiento de ventas del primer al último mes por región y producto:<br>";
+$mayorCrecimiento = -1000;
 $productoMayorCrecimiento = '';
 $regionMayorCrecimiento = '';
 
 foreach ($ventas as $region => $productos) {
-    echo "$region:\n";
+    echo "$region:<br>";
     foreach ($productos as $producto => $ventasProducto) {
         $crecimiento = calcularCrecimiento($ventasProducto);
-        echo "  $producto: " . number_format($crecimiento, 2) . "%\n";
+        echo "  $producto: " . number_format($crecimiento, 2) . "%<br>";
 
         // Identificar el mayor crecimiento
         if ($crecimiento > $mayorCrecimiento) {
@@ -123,9 +123,9 @@ foreach ($ventas as $region => $productos) {
             $regionMayorCrecimiento = $region;
         }
     }
-    echo "\n";
+    echo "<br>";
 }
 
-// 10. Mostrar el producto y la región con mayor crecimiento
-echo "Producto y región con mayor crecimiento:\n";
-echo "$productoMayorCrecimiento en la región $regionMayorCrecimiento con un crecimiento de " . number_format($mayorCrecimiento, 2) . "%\n";
+// Mostrar el producto y la región con mayor crecimiento
+echo "<b>Producto y región con mayor crecimiento:</b><br>";
+echo "$productoMayorCrecimiento, en la región $regionMayorCrecimiento, con un crecimiento de: " . number_format($mayorCrecimiento, 2) . "%<br>";
