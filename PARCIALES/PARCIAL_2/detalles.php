@@ -1,6 +1,6 @@
 <?php
 
-interface Detalles
+interface Detalle
 {
-    public function obtenerDetallesEspecificos();
+    public function obtenerDetallesEspecificos(): string;
 }

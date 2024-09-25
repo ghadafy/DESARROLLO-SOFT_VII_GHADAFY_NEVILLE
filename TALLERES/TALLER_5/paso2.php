@@ -16,7 +16,7 @@ function mostrarInventario($inv)
 }
 echo '<br><br>';
 // 3. Mostrar inventario inicial
-echo "Inventario inicial:\n";
+echo "Inventario inicial:<br>";
 echo '<br><br>';
 mostrarInventario($inventario);
 
@@ -41,7 +41,7 @@ actualizarInventario($inventario, "auriculares", 100, 50);  // Nuevo producto
 
 echo '<br><br>';
 // 6. Mostrar inventario actualizado
-echo "\nInventario actualizado:\n";
+echo "<br>Inventario actualizado:<br>";
 echo '<br><br>';
 mostrarInventario($inventario);
 echo '<br><br>';
@@ -56,7 +56,7 @@ function valorTotalInventario($inv)
 }
 
 // 8. Mostrar valor total del inventario
-echo "\nValor total del inventario: $" . valorTotalInventario($inventario) . "\n";
+echo "<br>Valor total del inventario: $" . valorTotalInventario($inventario) . "<br>";
 echo '<br><br>';
 // TAREA: Crea una función que encuentre y retorne el producto con el mayor valor total en inventario
 // (cantidad * precio). Muestra el resultado.

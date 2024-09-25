@@ -17,41 +17,81 @@ $sortDirection = isset($_GET['direction']) ? $_GET['direction'] : 'ASC';
 $filterEstado = isset($_GET['filterEstado']) ? $_GET['filterEstado'] : '';
 
 $tareas = null;
+$gestorTareas = new GestorTareas();
 
 // Procesar la acción
 switch ($action) {
     case 'add':
-        // Los estudiantes deben implementar esta lógica
-
-        $gestorTareas->agregarTarea();
+        $nuevaTarea = new Tarea($_GET);
+        $gestorTareas->agregarTarea($nuevaTarea);
+        $mensaje = "Tarea agregada exitosamente";
         break;
+
 
     case 'edit':
-        // Los estudiantes deben implementar esta lógica
+        // Obtener el ID de la tarea a editar
+        $id = $_GET['id'];
+        // Buscar la tarea en el gestor de tareas
+        $tareaEnEdicion = $gestorTareas->buscarTareaPorId($id);
+
+
+        //  var_dump(($tareaEnEdicion));  Esto lo utilizamos para ver los valores que se cargan
+
+        if (isset($_GET['titulo']) && isset($_GET['descripcion']) && isset($_GET['prioridad'])) {
+
+            //Estos datos son  una guia para armar los valores que se van a guardar al actualizar
+
+            $tareaEnEdicion->titulo = $_GET['titulo'];  //       "titulo": "Implementar login",
+
+            $tareaEnEdicion->descripcion = $_GET['descripcion']; //    "descripcion": "Crear formulario de login y backend",
+
+            $tareaEnEdicion->prioridad = $_GET['prioridad']; // prioridad": 2
+
+            $tareaEnEdicion->estado = $_GET['estado']; //  "estado": "completada",
+
+            $tareaEnEdicion->lenguajeProgramacion = $_GET['lenguajeProgramacion']; //"lenguajeProgramacion": "PHP",
+
+            $tareaEnEdicion->fechaCreacion = $_GET['fechaCreacion']; //  "fechaCreacion": "2024-09-20",
+
+            $tareaEnEdicion->tipo = $_GET['tipo']; //  "tipo": "desarrollo",
+
+            $tareaEnEdicion->herramientaDiseno = $_GET['herramientaDiseno']; //  "herramientaDiseno": null,
+
+            $tareaEnEdicion->tipoTest = $_GET['tipoTest']; //  "tipoTest": null
+
+            $gestorTareas->editarTarea($id, $tareaEnEdicion);
+            $mensaje = "Tarea actualizada exitosamente";
+        }
 
         break;
 
+
+
     case 'delete':
-        // Los estudiantes deben implementar esta lógica
+        $id = $_GET['id'];
+        $gestorTareas->eliminarTarea($id);
+        $mensaje = "Tarea eliminada exitosamente";
         break;
 
     case 'status':
-        // Los estudiantes deben implementar esta lógica
+        $id = $_GET['id'];
+        $nuevoEstado = $_GET['estado'];
+        $gestorTareas->cambiarEstado($id, $nuevoEstado);
+        $mensaje = "Estado de la tarea actualizado";
         break;
 
     case 'filter':
-        // Los estudiantes deben implementar esta lógica
+        $tareas = $gestorTareas->filtrarTareasPorEstado($filterEstado);
         break;
 
     case 'list':
     default:
-        // Por ahora, simplemente cargamos todas las tareas
+        $tareas = $gestorTareas->ordenarTareas($sortField, $sortDirection);
         break;
 }
 
 // Cargar las tareas si aún no se han cargado
 if ($tareas === null) {
-    $gestorTareas = new GestorTareas();
     $tareas = $gestorTareas->cargarTareas();
 }
 
@@ -96,7 +136,7 @@ if ($tareas === null) {
                     <?php
                     for ($i = 1; $i <= 5; $i++) {
                         $selected = ($tareaEnEdicion && $tareaEnEdicion->prioridad == $i) ? 'selected' : '';
-                        echo "<option value=\"$i\" $selected>$i " . ($i == 1 ? '(Alta)' : ($i == 5 ? '(Baja)' : '')) . "</option>";
+                        echo "<option value=\"$i\" $selected>$i " . ($i == 1 ? 'Alta' : ($i == 2 ? 'Media Alta' : ($i == 3 ? 'Media' : ($i == 4 ? 'Media Baja' : 'Baja')))) . "</option>";
                     }
                     ?>
                 </select>
@@ -119,6 +159,14 @@ if ($tareas === null) {
                     <option value="e2e">E2E</option>
                 </select>
             </div>
+
+            <!--Aqui colocamos el campo de estado oculto para las tareas nuevas pendientes -->
+
+            <input type="hidden" name="estado" value="<?php echo $tareaEnEdicion ? $tareaEnEdicion->estado : 'pendiente'; ?>">
+
+            <!--Aqui colocamos el campo de fecha de creacion oculto para las tareas nuevas -->
+            <input type="hidden" name="fechaCreacion" value="<?php echo $tareaEnEdicion ? $tareaEnEdicion->fechaCreacion : date('Y-m-d'); ?>">
+
             <div class="col">
                 <button type="submit" class="btn btn-primary">
                     <?php echo $tareaEnEdicion ? 'Actualizar Tarea' : 'Agregar Tarea'; ?>
@@ -151,8 +199,7 @@ if ($tareas === null) {
                     <th><a href="index.php?action=sort&field=descripcion&direction=<?php echo $sortField == 'descripcion' && $sortDirection == 'ASC' ? 'DESC' : 'ASC'; ?>">Descripción <?php echo $sortField == 'descripcion' ? ($sortDirection == 'ASC' ? '▲' : '▼') : ''; ?></a></th>
                     <th><a href="index.php?action=sort&field=estado&direction=<?php echo $sortField == 'estado' && $sortDirection == 'ASC' ? 'DESC' : 'ASC'; ?>">Estado <?php echo $sortField == 'estado' ? ($sortDirection == 'ASC' ? '▲' : '▼') : ''; ?></a></th>
                     <th><a href="index.php?action=sort&field=prioridad&direction=<?php echo $sortField == 'prioridad' && $sortDirection == 'ASC' ? 'DESC' : 'ASC'; ?>">Prioridad <?php echo $sortField == 'prioridad' ? ($sortDirection == 'ASC' ? '▲' : '▼') : ''; ?></a></th>
-                    <th><a href="index.php?action=sort&field=tipo&direction=<?php echo $sortField == 'tipo' && $sortDirection == 'ASC' ? 'DESC' : 'ASC'; ?>">Tipo <?php echo $sortField == 'tipo' ? ($sortDirection == 'ASC' ? '▲' : '▼') : ''; ?></a></th>
-                    <th><a href="index.php?action=sort&field=fechaCreacion&direction=<?php echo $sortField == 'fechaCreacion' && $sortDirection == 'ASC' ? 'DESC' : 'ASC'; ?>">Fecha Creación <?php echo $sortField == 'fechaCreacion' ? ($sortDirection == 'ASC' ? '▲' : '▼') : ''; ?></a></th>
+                    <th>Tipo</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -162,23 +209,23 @@ if ($tareas === null) {
                         <td><?php echo $tarea->id; ?></td>
                         <td><?php echo $tarea->titulo; ?></td>
                         <td><?php echo $tarea->descripcion; ?></td>
-                        <td><?php echo $tarea->estado; ?></td>
+                        <td><?php echo ucfirst($tarea->estado); ?></td>
                         <td><?php echo $tarea->prioridad; ?></td>
-                        <td><?php echo $tarea->tipo; ?></td>
-                        <td><?php echo $tarea->fechaCreacion; ?></td>
+                        <td><?php echo ucfirst($tarea->tipo); ?></td>
                         <td>
-                            <a href='index.php?action=edit&id=<?php echo $tarea->id; ?>' class='btn btn-sm btn-warning'><i class='fas fa-edit'></i></a>
-                            <a href='index.php?action=delete&id=<?php echo $tarea->id; ?>' class='btn btn-sm btn-danger' onclick="return confirm('¿Está seguro de que desea eliminar esta tarea?');"><i class='fas fa-trash'></i></a>
-                            <div class='btn-group'>
-                                <button type='button' class='btn btn-sm btn-secondary dropdown-toggle' data-bs-toggle='dropdown'>
-                                    Estado
-                                </button>
-                                <ul class='dropdown-menu'>
-                                    <li><a class='dropdown-item' href='index.php?action=status&id=<?php echo $tarea->id; ?>&estado=pendiente'>Pendiente</a></li>
-                                    <li><a class='dropdown-item' href='index.php?action=status&id=<?php echo $tarea->id; ?>&estado=en_progreso'>En Progreso</a></li>
-                                    <li><a class='dropdown-item' href='index.php?action=status&id=<?php echo $tarea->id; ?>&estado=completada'>Completada</a></li>
-                                </ul>
-                            </div>
+                            <a href="index.php?action=edit&id=<?php echo $tarea->id; ?>" class="btn btn-sm btn-warning">Editar</a>
+                            <a href="index.php?action=delete&id=<?php echo $tarea->id; ?>" class="btn btn-sm btn-danger">Eliminar</a>
+
+
+                            <!-- Se modifico las opciones de mostrar el estado de la tarea -->
+
+                            <?php if ($tarea->estado == 'pendiente') : ?>
+                                <a href="index.php?action=status&id=<?php echo $tarea->id; ?>&estado=en_progreso" class="btn btn-sm btn-warning">En Progreso</a>
+                            <?php elseif ($tarea->estado == 'en_progreso') : ?>
+                                <a href="index.php?action=status&id=<?php echo $tarea->id; ?>&estado=completado" class="btn btn-sm btn-success">Completado</a>
+
+                            <?php endif; ?>
+
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -186,33 +233,13 @@ if ($tareas === null) {
         </table>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.getElementById('tipoTarea').addEventListener('change', function() {
-            const campoEspecifico = document.getElementById('campoEspecifico');
-            const campoDesarrollo = document.getElementById('campoDesarrollo');
-            const campoDiseno = document.getElementById('campoDiseno');
-            const campoTesting = document.getElementById('campoTesting');
-
-            campoEspecifico.style.display = 'none';
-            campoDesarrollo.style.display = 'none';
-            campoDiseno.style.display = 'none';
-            campoTesting.style.display = 'none';
-
-            switch (this.value) {
-                case 'desarrollo':
-                    campoEspecifico.style.display = 'block';
-                    campoDesarrollo.style.display = 'block';
-                    break;
-                case 'diseno':
-                    campoEspecifico.style.display = 'block';
-                    campoDiseno.style.display = 'block';
-                    break;
-                case 'testing':
-                    campoEspecifico.style.display = 'block';
-                    campoTesting.style.display = 'block';
-                    break;
-            }
+            var tipo = this.value;
+            document.getElementById('campoDesarrollo').style.display = tipo === 'desarrollo' ? 'block' : 'none';
+            document.getElementById('campoDiseno').style.display = tipo === 'diseno' ? 'block' : 'none';
+            document.getElementById('campoTesting').style.display = tipo === 'testing' ? 'block' : 'none';
+            document.getElementById('campoEspecifico').style.display = tipo ? 'block' : 'none';
         });
     </script>
 </body>

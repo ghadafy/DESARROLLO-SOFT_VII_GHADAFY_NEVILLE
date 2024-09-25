@@ -25,7 +25,7 @@ function asignarLetraCalificacion($promedio)
 }
 
 // 4. Procesar y mostrar información de estudiantes
-echo "Información de estudiantes:\n";
+echo "Información de estudiantes:<br>";
 echo "<br><br>";
 foreach ($estudiantes as &$estudiante) {
     $promedio = calcularPromedio($estudiante["calificaciones"]);
