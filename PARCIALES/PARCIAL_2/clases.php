@@ -1,234 +1,198 @@
 <?php
 
-require_once "detalles.php";
+interface Detalle
+{
+    public function obtenerDetallesEpecificos(): string;
+}
 
-class Tarea
+
+abstract class Entrada implements Detalle
 {
     public $id;
-    public $titulo;
-    public $descripcion;
-    public $estado;
-    public $prioridad;
-    public $fechaCreacion;
+    public $fecha_creacion;
     public $tipo;
-    public $lenguajeProgramacion;
-    public $herramientaDiseno;
-    public $tipoTest;
 
-
-    public function __construct($datos)
+    public function __construct($datos = [])
     {
         foreach ($datos as $key => $value) {
-            $this->$key = $value;
+            if (property_exists($this, $key)) {
+                $this->$key = $value;
+            }
         }
-    }
-
-    // Implementar estos getters
-    // public function getEstado() { }
-    // public function getPrioridad() { }
-
-    public function getEstado()
-    {
-        return  $this->estado;
-    }
-
-    public function getPrioridad()
-    {
-        return   $this->prioridad;
     }
 }
 
 
-
-class GestorTareas
+class EntradaUnaColumna extends Entrada
 {
-    public $archivo = 'tareas.json';
+    public $titulo;
+    public $descripcion;
 
-
-
-    public function cargarTareas()
-
-    /*
-    clase GestorTareas para que cree instancias de las clases hijas correspondientes al cargar las tareas desde el archivo JSON
-    */
+    public function obtenerDetallesEpecificos(): string
     {
-        if (file_exists($this->archivo)) {
-            $contenido = file_get_contents($this->archivo);
-            $data = json_decode($contenido, true);
-            $tareas = [];
-            foreach ($data as $item) {
-                switch ($item['tipo']) {
-                    case 'desarrollo':
-                        $tareas[] = new TareaDesarrollo($item);
+        return "Entrada de una columna: [$this->titulo]";
+    }
+}
+
+
+class EntradaDosColumnas extends Entrada
+{
+    public $titulo1;
+    public $descripcion1;
+    public $titulo2;
+    public $descripcion2;
+
+    public function obtenerDetallesEpecificos(): string
+    {
+        return "Entrada de una columna: [$this->titulo1] | [$this->titulo2]";
+    }
+}
+
+
+class EntradaTresColumnas extends Entrada
+{
+    public $titulo1;
+    public $descripcion1;
+    public $titulo2;
+    public $descripcion2;
+    public $titulo3;
+    public $descripcion3;
+
+    public function obtenerDetallesEpecificos(): string
+    {
+        return "Entrada de una columna: [$this->titulo1] | [$this->titulo2] | [$this->titulo3]";
+    }
+}
+
+
+class GestorBlog
+{
+    private $entradas = [];
+
+    public function cargarEntradas()
+    {
+        if (file_exists('blog.json')) {
+            $json = file_get_contents('blog.json');
+            $data = json_decode($json, true);
+            foreach ($data as $entradaData) {
+                switch ($entradaData['tipo']) {
+                    case 1:
+                        $this->entradas[] = new EntradaUnaColumna($entradaData);
                         break;
-                    case 'diseno':
-                        $tareas[] = new TareaDiseno($item);
+                    case 2:
+                        $this->entradas[] = new EntradaDosColumnas($entradaData);
                         break;
-                    case 'testing':
-                        $tareas[] = new TareaTesting($item);
-                        break;
-                    default:
-                        $tareas[] = new Tarea($item);
+                    case 3:
+                        $this->entradas[] = new EntradaTresColumnas($entradaData);
                         break;
                 }
             }
-            return $tareas;
         }
-        return [];
     }
 
 
 
-    public function guardarTareas($tareas)
+    public function cargardatos()
     {
-        //guardamos los datos en el archivo json
-        file_put_contents($this->archivo, json_encode($tareas, JSON_PRETTY_PRINT));
+        $json = file_get_contents('blog.json');
+        $data = json_decode($json, true);
+        return  $data;
+    }
+
+
+    public function guardarEntradas()
+    {
+        $data = array_map(function ($entrada) {
+            return get_object_vars($entrada);
+        }, $this->entradas);
+        file_put_contents('blog.json', json_encode($data, JSON_PRETTY_PRINT));
     }
 
 
 
-    public function agregarTarea($nuevaTarea)
+
+    public function obtenerEntradas()
     {
-        $tareas = $this->cargarTareas();
-        $nuevaTarea->id = count($tareas) + 1;
-        $tareas[] = $nuevaTarea;
-        $this->guardarTareas($tareas);
+        return $this->entradas;
     }
 
 
 
-    public function editarTarea($id, $tareaEditada)
+
+    public function obtenerProximoId()
     {
-        $tareas = $this->cargarTareas();
-        foreach ($tareas as $key => $tarea) {
-            if ($tarea->id == $id) {
-                $tareaEditada->id = $id;
-                $tareas[$key] = $tareaEditada;
-                break;
+        $indice = 0;
+        $entradas = $this->cargardatos();
+        foreach ($entradas as $ent) {
+            if ($ent['id'] > $indice) {
+                $indice = $ent['id'];
             }
         }
-        $this->guardarTareas($tareas);
+        return  $indice + 1;
     }
 
 
 
-
-    public function eliminarTarea($id)
+    public function agregarEntrada($entrada)
     {
-        $tareas = $this->cargarTareas();
-        foreach ($tareas as $key => $tarea) {
-            if ($tarea->id == $id) {
-                unset($tareas[$key]);
-                break;
-            }
+
+        $datos1 = [
+            'id' => $this->obtenerProximoId(),
+            'fecha_creacion' => date('Y-m-d'),
+            'tipo' => $entrada['tipo']
+        ];
+
+
+        if ($entrada['tipo'] == 1) {
+            $datos2 = [
+                'titulo' => $entrada->titulo,
+                'descripcion' => $entrada->descripcion
+            ];
+        } elseif ($entrada['tipo'] == 2) {
+            $datos2 = [
+                'titulo1' => $entrada->titulo1,
+                'descripcion1' => $entrada->descripcion1,
+                'titulo2' => $entrada->titulo2,
+                'descripcion2' => $entrada->descripcion2
+            ];
+        } elseif ($entrada['tipo'] == 3) {
+            $datos2 = [
+                'titulo1' => $entrada->titulo1,
+                'descripcion1' => $entrada->descripcion1,
+                'titulo2' => $entrada->titulo2,
+                'descripcion2' => $entrada->descripcion2,
+                'titulo3' => $entrada->titulo3,
+                'descripcion3' => $entrada->descripcion3
+
+            ];
         }
-        $this->guardarTareas(array_values($tareas));
+
+
+
+        $this->entradas[] = array_merge($datos1, $datos2);
+        /*
+        echo  '<pre>';
+        var_dump($this->entradas);
+        echo '</pre>';
+
+*/
+        // $this->guardarEntradas();
     }
 
 
 
-    public function cambiarEstado($id, $nuevoEstado)
+    public function editarEntrada($entrada)
     {
-        $tareas = $this->cargarTareas();
-        foreach ($tareas as $tarea) {
-            if ($tarea->id == $id) {
-                $tarea->estado = $nuevoEstado;
-                break;
-            }
-        }
-        $this->guardarTareas($tareas);
     }
 
-
-    public function buscarTareaPorId($id)
+    public function eliminarEntrada($id)
     {
-        $tareas = $this->cargarTareas();
-        foreach ($tareas as $tarea) {
-            if ($tarea->id == $id) {
-                return $tarea;
-            }
-        }
-        return null;
     }
 
-
-
-    public function filtrarTareasPorEstado($estado)
+    public function obtenerEntrada($id)
     {
-        $tareas = $this->cargarTareas();
-        if ($estado) {
-            return array_filter($tareas, function ($tarea) use ($estado) {
-                return $tarea->estado === $estado;
-            });
-        }
-        return $tareas;
     }
-
-
-
-
-    public function ordenarTareas($field, $direction)
+    public function moverEntrada($id, $direccion)
     {
-        $tareas = $this->cargarTareas();
-        usort($tareas, function ($a, $b) use ($field, $direction) {
-            $valueA = $a->{$field};
-            $valueB = $b->{$field};
-            return $direction === 'ASC' ? strcmp($valueA, $valueB) : strcmp($valueB, $valueA);
-        });
-        return $tareas;
-    }
-}
-
-
-
-class TareaDesarrollo extends Tarea implements Detalle
-{
-    public $lenguajeProgramacion;
-
-    // constructor
-    public function __construct($datos)
-    {
-        parent::__construct($datos); //constructor padre
-    }
-
-    public function obtenerDetallesEspecificos(): string
-    {
-        return "Lenguaje de programación: " . $this->lenguajeProgramacion;
-    }
-}
-
-
-
-class TareaDiseno extends Tarea implements Detalle
-{
-    public $herramientaDiseno;
-
-    //constructor 
-    public function __construct($datos)
-    {
-        parent::__construct($datos); //constructor padre
-    }
-
-    public function obtenerDetallesEspecificos(): string
-    {
-        return "Herramienta de diseño: " . $this->herramientaDiseno;
-    }
-}
-
-
-
-class TareaTesting extends Tarea implements Detalle
-{
-    public $tipoTest;
-
-    //constructor 
-    public function __construct($datos)
-    {
-        parent::__construct($datos); // constructor padre
-    }
-
-    public function obtenerDetallesEspecificos(): string
-    {
-        return "Tipo de test: " . $this->tipoTest;
     }
 }
