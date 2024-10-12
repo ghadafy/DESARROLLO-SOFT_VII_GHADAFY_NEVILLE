@@ -16,36 +16,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 if (isset($_POST['tipo'])) {
                     $gestorBlog->agregarEntrada($_POST);
+                    $mensaje = "Entrada agregada exitosamente.";
                 }
-
+                break;
 
             case 'edit':
                 // Asegurarse de que el tipo esté definido
                 if (!isset($_POST['tipo'])) {
                     $mensaje = "Error: Tipo de entrada no especificado.";
                     break;
+                } else {
+                    $gestorBlog->editarEntrada($_POST);
+                    $mensaje = "Entrada modificada exitosamente.";
+                    break;
                 }
 
-                // Implementar la lógica
+                // Implementar la lógica - LISTO
 
-                break;
         }
     }
 }
 
 if ($action === 'delete' && isset($_GET['id'])) {
-    // Implementar la lógica
+    // Implementar la lógica  - LISTO
+    $gestorBlog->eliminarEntrada($_GET['id']);
     $mensaje = "Entrada eliminada con éxito.";
     $action = "list";
 }
 
 if (($action === 'move_up' || $action === 'move_down') && isset($_GET['id'])) {
-    // Implementar la lógica
+    // Implementar la lógica - LISTO
+    $gestorBlog->moverEntrada($_GET['id'], $_GET['action']);
     $mensaje = "Entrada reordenada con éxito.";
     $action = "list";
 }
 
 $entradas = $gestorBlog->obtenerEntradas();
+
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -67,6 +75,8 @@ $entradas = $gestorBlog->obtenerEntradas();
             <div class="alert alert-success" role="alert">
                 <?php echo $mensaje; ?>
             </div>
+
+
         <?php endif; ?>
 
         <nav class="mb-4">
@@ -87,7 +97,14 @@ $entradas = $gestorBlog->obtenerEntradas();
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($entradas as $entrada) : ?>
+                    <?php
+                    $cantidad_entradas = count($entradas);
+                    $contador = 1;
+                    uasort($entradas, function ($a, $b) {
+                        return $a->id <=> $b->id;
+                    });
+
+                    foreach ($entradas as $entrada) : ?>
                         <tr>
                             <td><?php echo $entrada->id; ?></td>
                             <td><?php echo $entrada->titulo ?? $entrada->titulo1; ?></td>
@@ -96,11 +113,17 @@ $entradas = $gestorBlog->obtenerEntradas();
                             <td>
                                 <a href="index.php?action=edit&id=<?php echo $entrada->id; ?>" class="btn btn-warning btn-sm">Editar</a>
                                 <a href="index.php?action=delete&id=<?php echo $entrada->id; ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Está seguro de eliminar esta entrada?')">Eliminar</a>
-                                <a href="index.php?action=move_up&id=<?php echo $entrada->id; ?>" class="btn btn-secondary btn-sm">▲</a>
-                                <a href="index.php?action=move_down&id=<?php echo $entrada->id; ?>" class="btn btn-secondary btn-sm">▼</a>
+                                <?php if ($contador > 1) : ?>
+                                    <a href="index.php?action=move_up&id=<?php echo $entrada->id; ?>" class="btn btn-secondary btn-sm">▲</a>
+                                <?php endif; ?>
+
+                                <?php if ($contador < $cantidad_entradas) : ?>
+                                    <a href="index.php?action=move_down&id=<?php echo $entrada->id; ?>" class="btn btn-secondary btn-sm">▼</a>
+                                <?php endif; ?>
                             </td>
                         </tr>
-                    <?php endforeach; ?>
+                    <?php $contador++;
+                    endforeach; ?>
                 </tbody>
             </table>
             <a href="index.php?action=view" class="btn btn-primary">Ver Blog</a>
@@ -111,14 +134,14 @@ $entradas = $gestorBlog->obtenerEntradas();
                 $entradaEditar = $gestorBlog->obtenerEntrada($_GET['id']);
             }
             ?>
-            <form action="index.php" method="post">
+            <form action="index.php" method="post" name="editar">
                 <input type="hidden" name="action" value="<?php echo $action; ?>">
                 <?php if ($entradaEditar) : ?>
                     <input type="hidden" name="id" value="<?php echo $entradaEditar->id; ?>">
                 <?php endif; ?>
 
                 <div class="mb-3">
-                    <label for="tipo" class="form-label">Tipo de Entrada</label>
+                    <label for="tipo" class="form-label">Tipo de Entrada </label>
                     <select class="form-select" id="tipo" name="tipo" required>
                         <option value="1" <?php echo $entradaEditar && $entradaEditar->tipo == 1 ? 'selected' : ''; ?>>1 Columna</option>
                         <option value="2" <?php echo $entradaEditar && $entradaEditar->tipo == 2 ? 'selected' : ''; ?>>2 Columnas</option>
