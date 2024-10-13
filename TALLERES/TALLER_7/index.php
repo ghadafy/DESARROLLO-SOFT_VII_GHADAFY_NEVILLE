@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // En un caso real, verificaríamos contra una base de datos
     if ($usuario === "admin" && $contrasena === "1234") {
         $_SESSION['usuario'] = $usuario;
-        header("Location: panel.php");
+        header("Location: panel2.php");
         exit();
     } else {
         $error = "Usuario o contraseña incorrectos";
@@ -38,6 +38,7 @@ $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 </head>
 
 <body>
+    <h2>BIENVENIDO A TU TIENDA ONLINE</h2>
     <h2>Login</h2>
     <?php
     if (isset($error)) {

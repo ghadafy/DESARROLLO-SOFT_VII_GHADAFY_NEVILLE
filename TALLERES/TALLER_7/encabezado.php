@@ -18,11 +18,4 @@ if (!isset($_SESSION['usuario'])) {
 
 <body>
     <h2>Bienvenido, <?php echo htmlspecialchars($_SESSION['usuario']); ?>!</h2>
-    <p>Esta es tu área personal.</p>
-    <a href="logout.php">Cerrar Sesión</a>
-
-
-
-</body>
-
-</html>
+    <p>Esta es tu área de compra.</p>
