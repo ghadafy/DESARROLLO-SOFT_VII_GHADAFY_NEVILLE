@@ -1,5 +1,6 @@
 <?php
-session_start();
+
+include 'config_sesion.php';
 
 if (isset($_SESSION['usuario'])) {
     echo "Bienvenido/a, " . htmlspecialchars($_SESSION['usuario']) . "!<br>";

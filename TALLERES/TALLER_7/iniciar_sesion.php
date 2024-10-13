@@ -1,5 +1,6 @@
 <?php
-session_start();
+
+include 'config_sesion.php';
 
 $_SESSION['usuario'] = "María";
 $_SESSION['rol'] = "admin";
