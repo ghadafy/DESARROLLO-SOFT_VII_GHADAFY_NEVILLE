@@ -8,7 +8,7 @@ $credenciales = [
         "tipo" => 2
     ],
     [
-        "nombre" => "Eduardo Grifin",
+        "nombre" => "Eduardo Griffith",
         "usuario" => "eduardo",
         "pass" => "98765",
         "tipo" => 1
