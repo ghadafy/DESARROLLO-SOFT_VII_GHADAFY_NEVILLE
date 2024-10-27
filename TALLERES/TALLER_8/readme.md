@@ -3,6 +3,8 @@
 ## Descripción
 Este proyecto es un sistema de gestión de biblioteca que permite registrar, editar y eliminar préstamos de libros a usuarios. Utiliza PHP y PDO para interactuar con la base de datos MySQL.
 
+La opcion de eliminar se oculto para evitar eliminar registros que estan registrados en los prestamos.
+
 ## Estructura del Proyecto
 
 | sistema-biblioteca │ 
