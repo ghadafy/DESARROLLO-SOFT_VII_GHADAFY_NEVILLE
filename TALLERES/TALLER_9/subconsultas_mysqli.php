@@ -4,13 +4,7 @@ echo "CONSULTA CON MYSQLI<br>";
 require_once "config_mysqli.php";
 
 // 1. Productos que tienen un precio mayor al promedio de su categoría
-/*
-$sql = "SELECT p.nombre, p.precio, c.nombre as categoria,
-        (SELECT AVG(precio) FROM productos WHERE categoria_id = p.categoria_id) as promedio_categoria
-        FROM productos p
-        JOIN categorias c ON p.categoria_id = c.id
-        WHERE p.precio > (SELECT AVG(precio) FROM productos WHERE categoria_id = p.categoria_id)";
-*/
+
 
 $sql = "SELECT p.nombre, p.precio, c.nombre AS categoria, AVG(p2.precio) AS promedio_categoria
         FROM productos p
@@ -31,23 +25,6 @@ if ($result) {
     mysqli_free_result($result);
 }
 
-
-
-// 2. Clientes con compras superiores al promedio
-/*
-$sql = "SELECT c.nombre, c.email,
-        (SELECT SUM(total) FROM ventas WHERE cliente_id = c.id) as total_compras,
-        (SELECT AVG(total) FROM ventas) as promedio_ventas
-        FROM clientes c
-        WHERE (
-            SELECT SUM(total)
-            FROM ventas
-            WHERE cliente_id = c.id
-        ) > (
-            SELECT AVG(total)
-            FROM ventas
-        )";
-*/
 
 
 $sql = "SELECT c.nombre, c.email,
@@ -75,7 +52,7 @@ if ($result) {
 // 1. Encontrar los productos que nunca se han vendido
 
 //Esta consulta no es optima
-/*$sql = "SELECT p.nombre, p.precio from productos p WHERE p.id not in(SELECT producto_id from detalles_venta)";*/
+
 
 
 $sql = "SELECT p.nombre, p.precio
@@ -99,12 +76,7 @@ if ($result) {
 
 //Esta cosnulta no es optima
 
-/*$sql = "SELECT c.nombre, (SELECT COUNT(id) FROM productos WHERE categoria_id=c.id) as CANTIDAD  from categorias c";*/
 
-/*
-$sql = "SELECT c.nombre, count(p.id) as cantidad, sum(p.precio*p.stock) as valor FROM categorias c LEFT JOIN productos p ON p.categoria_id=c.id
-group by c.nombre";
-*/
 
 $sql = "SELECT c.nombre, COUNT(p.id) AS cantidad, SUM(p.precio * p.stock) AS valor
         FROM categorias c
@@ -124,11 +96,7 @@ if ($result) {
 
 
 // 3. Encontrar los clientes que han comprado todos los productos de una categoría específica.
-/*
-$sql = "SELECT c.nombre, count(v.cliente_id) as cantidad, sum(v.total) as valor FROM clientes c 
-        JOIN ventas v ON c.id = v.cliente_id and v.cliente_id
-        group by c.id, c.nombre";
-*/
+
 
 
 $result = mysqli_query($conn, $sql);
@@ -143,10 +111,7 @@ if ($result) {
 
 
 // 4. Calcular el porcentaje de ventas de cada producto respecto al total de ventas.
-/*
-$sql = "SELECT  sum(dv.subtotal) as subtotal_venta, p.nombre as nom, sum(dv.subtotal) over() as gran_total  FROM detalles_venta dv join productos p on dv.producto_id=p.id
-group by dv.producto_id, p.nombre";
-*/
+
 
 
 $sql = "SELECT p.nombre AS nom, 

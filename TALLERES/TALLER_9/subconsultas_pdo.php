@@ -5,14 +5,6 @@ require_once "config_pdo.php";
 try {
 
 
-    /* 
-$sql = "SELECT p.nombre, p.precio, c.nombre AS categoria, AVG(p2.precio) AS promedio_categoria
-        FROM productos p
-        JOIN categorias c ON p.categoria_id = c.id
-        JOIN productos p2 ON p.categoria_id = p2.categoria_id
-        GROUP BY p.id
-        HAVING p.precio > AVG(p2.precio)";
-*/
 
     // 1. Productos que tienen un precio mayor al promedio de su categoría
     $sql = "SELECT p.nombre, p.precio, c.nombre AS categoria, AVG(p2.precio) AS promedio_categoria
