@@ -139,7 +139,7 @@ class GestorBlog
 
         $datos1 = [
             'id' => $this->obtenerProximoId(),
-            'fecha_creacion' => date('Y-m-d'),
+            'fecha_creacion' => date('Y-m-d H:i:s'),
             'tipo' => intVal($entrada['tipo'])
         ];
 

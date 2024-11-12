@@ -10,12 +10,21 @@ function sanitizarEmail($email)
     return filter_var(trim($email), FILTER_SANITIZE_EMAIL);
 }
 
-function sanitizarEdad($edad)
+
+function sanitizarNacimiento($nacimiento)
 {
-    return filter_var($edad, FILTER_SANITIZE_NUMBER_INT);
+    return filter_var(trim($nacimiento), FILTER_SANITIZE_SPECIAL_CHARS);
 }
 
-function sanitizarSitioWeb($sitioWeb)
+
+/*
+function sanitizarEdad($nacimiento)
+{
+    return filter_var($nacimiento, FILTER_SANITIZE_NUMBER_INT);
+}
+*/
+
+function sanitizarSitioweb($sitioWeb)
 {
     return filter_var(trim($sitioWeb), FILTER_SANITIZE_URL);
 }
