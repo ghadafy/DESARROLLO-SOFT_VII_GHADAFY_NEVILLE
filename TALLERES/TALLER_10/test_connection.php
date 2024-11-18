@@ -9,6 +9,7 @@ try {
     echo "<p>Nombre: " . htmlspecialchars($user['name']) . "</p>";
     echo "<p>Repositorios públicos: " . $user['public_repos'] . "</p>";
 } catch (Exception $e) {
+
     echo "<h2>Error de conexión</h2>";
     echo "<p>Error: " . htmlspecialchars($e->getMessage()) . "</p>";
 }
